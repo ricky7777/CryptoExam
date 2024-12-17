@@ -1,35 +1,137 @@
 package com.crypto.exam
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.crypto.exam.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowLeft
+import androidx.compose.material.icons.automirrored.filled.ArrowRight
+import androidx.compose.material.icons.filled.AddBox
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowCircleLeft
+import androidx.compose.material.icons.filled.ArrowCircleRight
+import androidx.compose.material.icons.filled.ArrowRight
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.InsertLink
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Restore
+import androidx.compose.material.icons.filled.RestorePage
+import androidx.compose.material.icons.filled.Shower
+import androidx.compose.material.icons.filled.SwitchLeft
+import androidx.compose.material.icons.filled.SwitchRight
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
-class DemoActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class DemoActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent {
+            DemoApp()
+        }
+    }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    @Composable
+    private fun DemoApp() {
+        val navController = rememberNavController()
+        Scaffold(
+            bottomBar = { BottomNavigationBar(navController) }
+        ) { innerPadding ->
+            NavHostContainer(navController, Modifier.padding(innerPadding))
+        }
+    }
 
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+    @Composable
+    private fun BottomNavigationBar(navController: NavHostController) {
+        BottomNavigation {
+            BottomNavigationItem(
+                icon = { Icon(Icons.Default.Refresh, contentDescription = "Clear") },
+                selected = false,
+                onClick = { navController.navigate("Clear") }
             )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+            BottomNavigationItem(
+                icon = { Icon(Icons.Default.AddBox, contentDescription = "Insert") },
+                selected = false,
+                onClick = { navController.navigate("Insert") }
+            )
+            BottomNavigationItem(
+                icon = { Icon(Icons.Default.ArrowCircleRight, contentDescription = "ShowA") },
+                selected = false,
+                onClick = { navController.navigate("ShowA") }
+            )
+            BottomNavigationItem(
+                icon = { Icon(Icons.Default.ArrowCircleLeft, contentDescription = "ShowB") },
+                selected = false,
+                onClick = { navController.navigate("ShowB") }
+            )
+            BottomNavigationItem(
+                icon = { Icon(Icons.Default.Visibility, contentDescription = "ShowAll") },
+                selected = false,
+                onClick = { navController.navigate("ShowAll") }
+            )
+        }
+    }
+
+    @Composable
+    private fun NavHostContainer(navController: NavHostController, modifier: Modifier) {
+        NavHost(navController, startDestination = "home", modifier = modifier) {
+            composable("home") { HomeScreen() }
+            composable("dashboard") { DashboardScreen() }
+            composable("notifications") { NotificationScreen() }
+            composable("profile") { ProfileScreen() }
+            composable("settings") { SettingsScreen() }
+        }
+    }
+
+    @Composable
+    private fun HomeScreen() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Text("Home Screen")
+        }
+    }
+
+    @Composable
+    private fun DashboardScreen() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Text("Dashboard Screen")
+        }
+    }
+
+    @Composable
+    private fun NotificationScreen() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Text("Notification Screen")
+        }
+    }
+
+    @Composable
+    private fun ProfileScreen() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Text("Profile Screen")
+        }
+    }
+
+    @Composable
+    private fun SettingsScreen() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Text("Settings Screen")
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    private fun DefaultPreview() {
+        DemoApp()
     }
 }
