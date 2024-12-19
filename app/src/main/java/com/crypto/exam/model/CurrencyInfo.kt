@@ -15,7 +15,9 @@ data class CurrencyInfo(
     @ColumnInfo val symbol: String,  // The display symbol of the currency
     @ColumnInfo val code: String?,     // Fiat currency code, ISO 4217
     @ColumnInfo var type: String     // currency type Crypto/Fiat
-)
+){
+    fun isCrypto():Boolean = type == CurrencyType.Crypto.toString()
+}
 
 enum class CurrencyType {
     Crypto, Fiat
