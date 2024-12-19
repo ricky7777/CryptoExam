@@ -33,8 +33,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
+/**
+ * @author Ricky Chen
+ * All entry point
+ */
 class DemoActivity : ComponentActivity() {
 
+    private val demoViewModel = DemoViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,44 +63,44 @@ class DemoActivity : ComponentActivity() {
             BottomNavigationItem(
                 icon = { Icon(Icons.Default.Refresh, contentDescription = "Clear") },
                 selected = false,
-                onClick = { navController.navigate("Clear") }
+                onClick = { demoViewModel.clearCurrencyInfo() }
             )
             BottomNavigationItem(
                 icon = { Icon(Icons.Default.AddBox, contentDescription = "Insert") },
                 selected = false,
-                onClick = { navController.navigate("Insert") }
+                onClick = { demoViewModel.insertAllCurrencyInfo() }
             )
             BottomNavigationItem(
                 icon = { Icon(Icons.Default.ArrowCircleRight, contentDescription = "ShowA") },
                 selected = false,
-                onClick = { navController.navigate("ShowA") }
+                onClick = { demoViewModel.showCryptoInfo() }
             )
             BottomNavigationItem(
                 icon = { Icon(Icons.Default.ArrowCircleLeft, contentDescription = "ShowB") },
                 selected = false,
-                onClick = { navController.navigate("ShowB") }
+                onClick = { demoViewModel.showFiatInfo() }
             )
             BottomNavigationItem(
                 icon = { Icon(Icons.Default.Visibility, contentDescription = "ShowAll") },
                 selected = false,
-                onClick = { navController.navigate("ShowAll") }
+                onClick = { demoViewModel.showCurrencyInfo() }
             )
         }
     }
 
     @Composable
     private fun NavHostContainer(navController: NavHostController, modifier: Modifier) {
-        NavHost(navController, startDestination = "home", modifier = modifier) {
-            composable("home") { HomeScreen() }
-            composable("dashboard") { DashboardScreen() }
-            composable("notifications") { NotificationScreen() }
-            composable("profile") { ProfileScreen() }
-            composable("settings") { SettingsScreen() }
-        }
+//        NavHost(navController, startDestination = "home", modifier = modifier) {
+//            composable("Clear") { ClearScreen() }
+//            composable("Insert") { DashboardScreen() }
+//            composable("ShowA") { NotificationScreen() }
+//            composable("ShowB") { ProfileScreen() }
+//            composable("ShowAll") { SettingsScreen() }
+//        }
     }
 
     @Composable
-    private fun HomeScreen() {
+    private fun ClearScreen() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Text("Home Screen")
         }
