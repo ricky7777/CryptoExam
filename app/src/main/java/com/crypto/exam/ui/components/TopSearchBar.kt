@@ -3,7 +3,6 @@ package com.crypto.exam.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -18,6 +17,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.crypto.exam.R
 
+/**
+ * @author Ricky
+ * Top part UI, for search use
+ */
 @Composable
 fun TopSearchBar(query: String, onQueryChanged: (String) -> Unit) {
     TopAppBar(

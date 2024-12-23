@@ -16,6 +16,10 @@ import org.koin.androidx.compose.koinViewModel
 /**
  * @author Ricky
  * because use jetpack compose, use this to replace CurrencyListFragment
+ * this screen have three part
+ * top side is search bar
+ * bottom side is bottom navigation bar
+ * content area is main screen
  */
 @Composable
 fun CurrencyListScreen(demoViewModel: DemoViewModel = koinViewModel()) {

@@ -19,11 +19,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.crypto.exam.R
 import com.crypto.exam.model.CurrencyInfo
 
+/**
+ * @author Ricky
+ * Crypto list item for main display area list
+ */
 @Composable
 internal fun CryptoListItem(currencyInfo: CurrencyInfo) {
     Row(
@@ -31,7 +37,7 @@ internal fun CryptoListItem(currencyInfo: CurrencyInfo) {
             .fillMaxWidth()
             .padding(16.dp)
             .clickable {
-                // Handle item click
+                // Handle item click, if need
             },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -63,7 +69,7 @@ internal fun CryptoListItem(currencyInfo: CurrencyInfo) {
 
         Icon(
             imageVector = Icons.Default.ChevronRight,
-            contentDescription = "Next",
+            contentDescription = stringResource(R.string.crypto_arrow_right_desc),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }

@@ -67,7 +67,7 @@ class DemoViewModel(private val repository: CurrencyInfoRepository) : ViewModel(
         }
     }
 
-    fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    fun showToast(messageId: Int) {
+        Toast.makeText(context, messageId, Toast.LENGTH_LONG).show()
     }
 }

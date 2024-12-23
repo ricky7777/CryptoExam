@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,27 +27,39 @@ import com.crypto.exam.R
 import com.crypto.exam.model.CurrencyInfo
 import com.crypto.exam.ui.components.CryptoListItem
 
+/**
+ * @author Ricky
+ * Main display area(currencies show area)
+ */
 @Composable
 fun MainScreen(
     cryptoList: State<List<CurrencyInfo>>, query: String, innerPadding: PaddingValues
 ) {
     if (cryptoList.value.isEmpty()) {
         EmptyView()
-    } else {
-        Column(
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            LazyColumn {
-                items(cryptoList.value.filter { currency ->
-                    matchingCoin(currency, query)
-                }) { item ->
-                    CryptoListItem(item)
-                }
+        return
+    }
+
+    Column(
+        modifier = Modifier.padding(innerPadding)
+    ) {
+        LazyColumn {
+            items(cryptoList.value.filter { currency ->
+                matchingCoin(currency, query)
+            }) { item ->
+                CryptoListItem(item)
             }
         }
     }
+
 }
 
+/**
+ * search logic
+ * start with query or
+ * contain with query or
+ * symbol with query
+ */
 private fun matchingCoin(currency: CurrencyInfo, query: String): Boolean {
     if (query.isBlank()) return true
 
@@ -85,7 +98,7 @@ private fun EmptyView(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "No Data Available", style = textStyle
+            text = stringResource(R.string.text_no_data_available), style = textStyle
         )
     }
 }

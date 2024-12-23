@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">CryptoExam</string>
     <string name="hint_search">Search</string>
+    <string name="crypto_arrow_right_desc">Next</string>
+    <string name="text_no_data_available">No Data Available</string>
+    <string name="text_clear_success">Clear Success!</string>
+    <string name="text_insert_success">Insert Success!</string>
+    <string name="desc_clear">Clear</string>
+    <string name="desc_insert">Insert</string>
+    <string name="desc_show_crypto">Show crypto currencies</string>
+    <string name="desc_show_fiat">Show fiat</string>
+    <string name="desc_show_all">Show all</string>
 </resources>

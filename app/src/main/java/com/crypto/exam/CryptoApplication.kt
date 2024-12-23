@@ -15,6 +15,7 @@ import org.koin.dsl.module
 /**
  *  @author Ricky
  *  application setting with koin
+ *  include AssetManager/CurrencyInfoRepository/DemoViewModel and RoomDB
  */
 class CryptoApplication : Application() {
 
