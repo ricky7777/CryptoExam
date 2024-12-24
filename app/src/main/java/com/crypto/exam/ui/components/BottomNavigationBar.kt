@@ -1,5 +1,7 @@
 package com.crypto.exam.ui.components
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -16,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.crypto.exam.DemoViewModel
 import com.crypto.exam.R
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * @author Ricky
@@ -23,6 +26,7 @@ import com.crypto.exam.R
  */
 @Composable
 fun BottomNavigationBar(demoViewModel: DemoViewModel) {
+    val context = LocalContext.current
 
     BottomNavigation {
         BottomNavigationItem(
@@ -36,7 +40,7 @@ fun BottomNavigationBar(demoViewModel: DemoViewModel) {
             onClick = {
                 demoViewModel.performActionWithLoading {
                     demoViewModel.clearCurrencyInfo()
-                    demoViewModel.showToast(R.string.text_clear_success)
+                    showToast(context, R.string.text_clear_success)
                 }
             })
         BottomNavigationItem(
@@ -50,7 +54,7 @@ fun BottomNavigationBar(demoViewModel: DemoViewModel) {
             onClick = {
                 demoViewModel.performActionWithLoading {
                     demoViewModel.insertAllCurrencyInfo()
-                    demoViewModel.showToast(R.string.text_insert_success)
+                    showToast(context, R.string.text_insert_success)
                 }
             })
         BottomNavigationItem(icon = {
@@ -89,4 +93,9 @@ fun BottomNavigationBar(demoViewModel: DemoViewModel) {
                 }
             })
     }
+
+}
+
+private fun showToast(context: Context, messageId: Int) {
+    Toast.makeText(context, messageId, Toast.LENGTH_LONG).show()
 }

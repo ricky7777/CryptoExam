@@ -31,7 +31,6 @@ class CryptoApplication : Application() {
 
     private val appModule: Module = module {
         single { AssetManager(get()) }
-        single { CurrencyInfoRepository() }
         viewModelOf(::DemoViewModel)
         single<AppDatabase> {
             Room.databaseBuilder(
@@ -40,5 +39,6 @@ class CryptoApplication : Application() {
                 AppDatabase.DB_NAME
             ).build()
         }
+        single { CurrencyInfoRepository(get(), get()) }
     }
 }

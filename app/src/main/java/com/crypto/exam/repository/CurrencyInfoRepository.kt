@@ -5,7 +5,6 @@ import com.crypto.exam.db.CurrencyInfoTypeConverter
 import com.crypto.exam.manager.AssetManager
 import com.crypto.exam.model.CurrencyInfo
 import com.crypto.exam.model.CurrencyType
-import org.koin.core.component.inject
 import java.io.IOException
 import java.io.InputStream
 
@@ -14,9 +13,10 @@ import java.io.InputStream
  * this is data provider, use repository pattern
  * integration the data and provider single window to VM
  */
-class CurrencyInfoRepository : IRepository {
-    private val assetManager: AssetManager by inject()
-    private val database: AppDatabase by inject()
+class CurrencyInfoRepository(
+    private val assetManager: AssetManager,
+    private val database: AppDatabase
+) : IRepository {
 
     companion object {
         private const val FILE_NAME_CURRENCY_INFO_CRYPTO = "currency_list_crypto.json"
@@ -101,5 +101,26 @@ class CurrencyInfoRepository : IRepository {
             e.printStackTrace()
         }
         return currencyInfoList
+    }
+
+    /**
+     * search logic
+     * start with query or
+     * contain with query or
+     * symbol with query
+     */
+    override fun matchingCoin(currency: CurrencyInfo, query: String): Boolean {
+        if (query.isBlank()) return true
+
+        val searchTerm = query.lowercase()
+        val coinName = currency.name.lowercase()
+        val coinSymbol = currency.symbol.lowercase()
+
+        return when {
+            coinName.startsWith(searchTerm) -> true
+            coinName.contains(" $searchTerm") -> true
+            coinSymbol.startsWith(searchTerm) -> true
+            else -> false
+        }
     }
 }
