@@ -50,9 +50,6 @@ open class DemoViewModel(private val repository: IRepository) : ViewModel() {
         }
     }
 
-    private fun matchingCoin(currency: CurrencyInfo, query: String): Boolean =
-        repository.matchingCoin(currency, query)
-
     fun filterAndUpdateCryptoList(query: String) {
         _cryptoList.value = _cryptoList.value.filter { currency ->
             matchingCoin(currency, query)
@@ -66,6 +63,27 @@ open class DemoViewModel(private val repository: IRepository) : ViewModel() {
             delay(1000)
             action()
             _isLoading.value = false
+        }
+    }
+
+    /**
+     * search logic
+     * start with query or
+     * contain with query or
+     * symbol with query
+     */
+    fun matchingCoin(currency: CurrencyInfo, query: String): Boolean {
+        if (query.isBlank()) return true
+
+        val searchTerm = query.lowercase()
+        val coinName = currency.name.lowercase()
+        val coinSymbol = currency.symbol.lowercase()
+
+        return when {
+            coinName.startsWith(searchTerm) -> true
+            coinName.contains(" $searchTerm") -> true
+            coinSymbol.startsWith(searchTerm) -> true
+            else -> false
         }
     }
 }

@@ -8,5 +8,4 @@ interface IRepository {
     suspend fun getCryptoInfo(): List<CurrencyInfo>
     suspend fun getFiatInfo(): List<CurrencyInfo>
     suspend fun insertAllCurrencyInfo()
-    fun matchingCoin(currency: CurrencyInfo, query: String): Boolean
 }

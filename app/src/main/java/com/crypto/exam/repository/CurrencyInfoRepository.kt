@@ -103,24 +103,4 @@ class CurrencyInfoRepository(
         return currencyInfoList
     }
 
-    /**
-     * search logic
-     * start with query or
-     * contain with query or
-     * symbol with query
-     */
-    override fun matchingCoin(currency: CurrencyInfo, query: String): Boolean {
-        if (query.isBlank()) return true
-
-        val searchTerm = query.lowercase()
-        val coinName = currency.name.lowercase()
-        val coinSymbol = currency.symbol.lowercase()
-
-        return when {
-            coinName.startsWith(searchTerm) -> true
-            coinName.contains(" $searchTerm") -> true
-            coinSymbol.startsWith(searchTerm) -> true
-            else -> false
-        }
-    }
 }

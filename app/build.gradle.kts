@@ -88,4 +88,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     debugImplementation(libs.compose.ui.tooling)
+    testImplementation(kotlin("test"))
 }
