@@ -76,3 +76,9 @@ Implement the following functionalities:
   ```diff
   + Implementation empty view when list is empty show.
   ```
+  
+- Lastly, it is crucial that all IO operations, including database or network access, are
+  not performed on the UI Thread to ensure smooth execution.
+  ```diff
+  + Room db run on self thread and not effect main thread
+  ```
