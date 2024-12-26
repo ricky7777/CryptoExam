@@ -55,6 +55,7 @@ fun BottomNavigationBar(demoViewModel: DemoViewModel) {
                 demoViewModel.performActionWithLoading {
                     demoViewModel.insertAllCurrencyInfo()
                     showToast(context, R.string.text_insert_success)
+                    demoViewModel.showCryptoInfo()
                 }
             })
         BottomNavigationItem(icon = {
