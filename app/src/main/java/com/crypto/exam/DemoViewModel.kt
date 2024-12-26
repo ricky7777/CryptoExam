@@ -50,8 +50,14 @@ open class DemoViewModel(private val repository: IRepository) : ViewModel() {
         }
     }
 
-    open fun matchingCoin(currency: CurrencyInfo, query: String): Boolean =
+    private fun matchingCoin(currency: CurrencyInfo, query: String): Boolean =
         repository.matchingCoin(currency, query)
+
+    fun filterAndUpdateCryptoList(query: String) {
+        _cryptoList.value = _cryptoList.value.filter { currency ->
+            matchingCoin(currency, query)
+        }
+    }
 
 
     fun performActionWithLoading(action: suspend () -> Unit) {

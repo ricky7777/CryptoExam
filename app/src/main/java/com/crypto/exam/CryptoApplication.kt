@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.crypto.exam.db.AppDatabase
 import com.crypto.exam.manager.AssetManager
 import com.crypto.exam.repository.CurrencyInfoRepository
+import com.crypto.exam.repository.IRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -39,6 +40,6 @@ class CryptoApplication : Application() {
                 AppDatabase.DB_NAME
             ).build()
         }
-        single { CurrencyInfoRepository(get(), get()) }
+        single<IRepository> { CurrencyInfoRepository(get(), get()) }
     }
 }
